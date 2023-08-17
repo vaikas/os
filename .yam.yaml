@@ -5,3 +5,7 @@ gap:
   - ".pipeline"
 
 indent: 2
+
+sort:
+  - ".environment.contents.packages"
+  - ".package.dependencies.runtime"
