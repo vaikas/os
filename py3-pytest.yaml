@@ -1,0 +1,38 @@
+# Generated from https://git.alpinelinux.org/aports/plain/main/py3-pytest/APKBUILD
+package:
+  name: py3-pytest
+  version: 7.4.2
+  epoch: 0
+  description: Python3 testing library
+  copyright:
+      - license: MIT
+environment:
+  contents:
+    packages:
+      - autoconf
+      - automake
+      - build-base
+      - busybox
+      - ca-certificates-bundle
+      - py3-gpep517
+      - py3-iniconfig
+      - py3-packaging
+      - py3-pluggy
+      - py3-py
+      - py3-setuptools
+      - py3-wheel
+      - python3
+pipeline:
+  - uses: fetch
+    with:
+      expected-sha256: a766259cfab564a2ad52cb1aae1b881a75c3eb7e34ca3779697c23ed47c47069
+      uri: https://files.pythonhosted.org/packages/source/p/pytest/pytest-${{package.version}}.tar.gz
+  - uses: autoconf/configure
+  - uses: autoconf/make
+  - uses: autoconf/make-install
+  - uses: strip
+subpackages:
+    - name: py3-pytest-pyc
+      pipeline:
+        - uses: split/FIXME
+      description: py3-pytest FIXME
