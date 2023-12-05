@@ -1,0 +1,27 @@
+# Generated from https://pypi.org/project/antlr4-python3-runtime/
+package:
+  name: py3-antlr4-python3-runtime
+  version: 4.13.1
+  epoch: 0
+  description: ANTLR 4.13.1 runtime for Python 3
+  copyright:
+    - license: BSD
+  dependencies:
+    runtime:
+      - py3-typing
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: fetch
+    with:
+      expected-sha256: 3cd282f5ea7cfb841537fe01f143350fdb1c0b1ce7981443a2fa8513fddb6d1a
+      uri: https://files.pythonhosted.org/packages/source/a/antlr4-python3-runtime/antlr4-python3-runtime-${{package.version}}.tar.gz
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip

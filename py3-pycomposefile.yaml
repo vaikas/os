@@ -1,0 +1,33 @@
+# Generated from https://pypi.org/project/pycomposefile/
+package:
+  name: py3-pycomposefile
+  version: 0.0.30
+  epoch: 0
+  description: Structured deserialization of Docker Compose files.
+  copyright:
+    - license: MIT
+  dependencies:
+    runtime:
+      - py3-pyyaml
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 7a1fe58a59a5003f6049436ae9fdda8649caac8f
+      repository: https://github.com/smurawski/pycomposefile
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: smurawski/pycomposefile

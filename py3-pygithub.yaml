@@ -1,0 +1,39 @@
+# Generated from https://pypi.org/project/PyGithub/
+package:
+  name: py3-pygithub
+  version: 2.1.1
+  epoch: 0
+  description: Use the full Github API v3
+  copyright:
+    - license: ""
+  dependencies:
+    runtime:
+      - py3-pynacl
+      - py3-python-dateutil
+      - py3-requests
+      - py3-pyjwt
+      - py3-typing-extensions
+      - py3-urllib3
+      - py3-deprecated
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: e584a90f6706c3b590a20e1c9caac7874ba6b122
+      repository: https://github.com/pygithub/pygithub
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: pygithub/pygithub

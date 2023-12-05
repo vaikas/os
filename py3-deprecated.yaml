@@ -1,0 +1,33 @@
+# Generated from https://pypi.org/project/Deprecated/
+package:
+  name: py3-deprecated
+  version: 1.2.14
+  epoch: 0
+  description: Python @deprecated decorator to deprecate old python classes, functions or methods.
+  copyright:
+    - license: MIT
+  dependencies:
+    runtime:
+      - py3-wrapt
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 378636d8a1e3d62d5894329c57f44ba0030c2dbd
+      repository: https://github.com/tantale/deprecated
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: tantale/deprecated

@@ -1,0 +1,130 @@
+# Generated from https://pypi.org/project/azure-cli/
+package:
+  name: py3-azure-cli
+  version: 2.55.0
+  epoch: 0
+  description: Microsoft Azure Command-Line Tools
+  copyright:
+    - license: MIT
+  dependencies:
+    runtime:
+      - py3-antlr4-python3-runtime
+      - py3-azure-appconfiguration
+      - py3-azure-batch
+      - py3-azure-cli-core
+      - py3-azure-cosmos
+      - py3-azure-data-tables
+      - py3-azure-datalake-store
+      - py3-azure-graphrbac
+      - py3-azure-keyvault-administration
+      - py3-azure-keyvault-certificates
+      - py3-azure-keyvault-keys
+      - py3-azure-keyvault-secrets
+      - py3-azure-loganalytics
+      - py3-azure-mgmt-advisor
+      - py3-azure-mgmt-apimanagement
+      - py3-azure-mgmt-appconfiguration
+      - py3-azure-mgmt-appcontainers
+      - py3-azure-mgmt-applicationinsights
+      - py3-azure-mgmt-authorization
+      - py3-azure-mgmt-batchai
+      - py3-azure-mgmt-batch
+      - py3-azure-mgmt-billing
+      - py3-azure-mgmt-botservice
+      - py3-azure-mgmt-cdn
+      - py3-azure-mgmt-cognitiveservices
+      - py3-azure-mgmt-compute
+      - py3-azure-mgmt-containerinstance
+      - py3-azure-mgmt-containerregistry
+      - py3-azure-mgmt-containerservice
+      - py3-azure-mgmt-cosmosdb
+      - py3-azure-mgmt-databoxedge
+      - py3-azure-mgmt-datalake-store
+      - py3-azure-mgmt-datamigration
+      - py3-azure-mgmt-devtestlabs
+      - py3-azure-mgmt-dns
+      - py3-azure-mgmt-eventgrid
+      - py3-azure-mgmt-eventhub
+      - py3-azure-mgmt-extendedlocation
+      - py3-azure-mgmt-hdinsight
+      - py3-azure-mgmt-imagebuilder
+      - py3-azure-mgmt-iotcentral
+      - py3-azure-mgmt-iothub
+      - py3-azure-mgmt-iothubprovisioningservices
+      - py3-azure-mgmt-keyvault
+      - py3-azure-mgmt-kusto
+      - py3-azure-mgmt-loganalytics
+      - py3-azure-mgmt-managedservices
+      - py3-azure-mgmt-managementgroups
+      - py3-azure-mgmt-maps
+      - py3-azure-mgmt-marketplaceordering
+      - py3-azure-mgmt-media
+      - py3-azure-mgmt-monitor
+      - py3-azure-mgmt-msi
+      - py3-azure-mgmt-netapp
+      - py3-azure-mgmt-policyinsights
+      - py3-azure-mgmt-privatedns
+      - py3-azure-mgmt-rdbms
+      - py3-azure-mgmt-recoveryservicesbackup
+      - py3-azure-mgmt-recoveryservices
+      - py3-azure-mgmt-redhatopenshift
+      - py3-azure-mgmt-redis
+      - py3-azure-mgmt-resource
+      - py3-azure-mgmt-search
+      - py3-azure-mgmt-security
+      - py3-azure-mgmt-servicebus
+      - py3-azure-mgmt-servicefabricmanagedclusters
+      - py3-azure-mgmt-servicelinker
+      - py3-azure-mgmt-servicefabric
+      - py3-azure-mgmt-signalr
+      - py3-azure-mgmt-sqlvirtualmachine
+      - py3-azure-mgmt-sql
+      - py3-azure-mgmt-storage
+      - py3-azure-mgmt-synapse
+      - py3-azure-mgmt-trafficmanager
+      - py3-azure-mgmt-web
+      - py3-azure-multiapi-storage
+      - py3-azure-storage-common
+      - py3-azure-synapse-accesscontrol
+      - py3-azure-synapse-artifacts
+      - py3-azure-synapse-managedprivateendpoints
+      - py3-azure-synapse-spark
+      - py3-chardet
+      - py3-colorama
+      - py3-distro
+      - py3-fabric
+      - py3-javaproperties
+      - py3-jsondiff
+      - py3-packaging
+      - py3-pycomposefile
+      - py3-pygithub
+      - py3-pynacl
+      - py3-scp
+      - py3-semver
+      - py3-six
+      - py3-sshtunnel
+      - py3-urllib3
+      - py3-websocket-client
+      - py3-xmltodict
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: ccf2bd499dc75e38010346febde63a0b629c34ee
+      repository: https://github.com/Azure/azure-cli
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: Azure/azure-cli

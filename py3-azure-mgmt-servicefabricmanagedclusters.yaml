@@ -1,0 +1,41 @@
+# Generated from https://pypi.org/project/azure-mgmt-servicefabricmanagedclusters/
+package:
+  name: py3-azure-mgmt-servicefabricmanagedclusters
+  version: 1.0.0
+  epoch: 0
+  description: Microsoft Azure Servicefabricmanagedclusters Management Client Library for Python
+  copyright:
+    - license: MIT License
+  dependencies:
+    runtime:
+      - py3-msrest
+      - py3-azure-mgmt-core
+      - py3-azure-common
+      - py3-azure-mgmt-nspkg
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 0c1d1e726c852bb3f863e4e97ad1e4e9738ae21d
+      repository: https://github.com/Azure/azure-sdk-for-python
+      tag: azure-agrifood-nspkg_${{package.version}}
+  - uses: git-checkout
+    with:
+      expected-commit: 6a1bee9d36e4fba47459e1851cfc9f99d4230611
+      repository: https://github.com/Azure/azure-sdk-for-python
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: Azure/azure-sdk-for-python

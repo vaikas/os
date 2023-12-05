@@ -1,0 +1,32 @@
+# Generated from https://pypi.org/project/azure-storage-nspkg/
+package:
+  name: py3-azure-storage-nspkg
+  version: 3.1.0
+  epoch: 0
+  description: Microsoft Azure Storage Namespace Package [Internal]
+  copyright:
+    - license: MIT License
+  dependencies:
+    runtime:
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 2060c3045638f117c2d0ac78d6f81abf6bce9245
+      repository: https://github.com/Azure/azure-storage-python
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: Azure/azure-storage-python

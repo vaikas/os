@@ -1,0 +1,32 @@
+# Generated from https://pypi.org/project/PyNaCl/
+package:
+  name: py3-pynacl
+  version: 1.5.0
+  epoch: 0
+  description: Python binding to the Networking and Cryptography (NaCl) library
+  copyright:
+    - license: Apache License 2.0
+  dependencies:
+    runtime:
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: ba3638fef06697ce3e1e30abe9bfd93a5ef816fc
+      repository: https://github.com/pyca/pynacl
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: pyca/pynacl

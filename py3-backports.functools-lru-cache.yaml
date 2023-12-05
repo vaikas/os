@@ -1,0 +1,32 @@
+# Generated from https://pypi.org/project/backports.functools-lru-cache/
+package:
+  name: py3-backports.functools-lru-cache
+  version: 1.6.6
+  epoch: 0
+  description: Backport of functools.lru_cache
+  copyright:
+    - license: ""
+  dependencies:
+    runtime:
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 4bf68e1bf9940cb91340dda7338d15234ef53a70
+      repository: https://github.com/jaraco/backports.functools_lru_cache
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: jaraco/backports.functools_lru_cache

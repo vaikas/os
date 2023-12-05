@@ -1,0 +1,40 @@
+# Generated from https://pypi.org/project/azure-multiapi-storage/
+package:
+  name: py3-azure-multiapi-storage
+  version: 1.2.0
+  epoch: 0
+  description: Microsoft Azure Storage Client Library for Python with multi API version support.
+  copyright:
+    - license: MIT
+  dependencies:
+    runtime:
+      - py3-azure-common
+      - py3-python-dateutil
+      - py3-requests
+      - py3-azure-core
+      - py3-msrest
+      - py3-cryptography
+      - py3-azure-nspkg
+      - py3-futures
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 650ef33ad683a5f2aba590c4553f9871bfa0dd93
+      repository: https://github.com/Azure/azure-multiapi-storage-python
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: Azure/azure-multiapi-storage-python

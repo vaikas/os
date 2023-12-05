@@ -1,0 +1,32 @@
+# Generated from https://pypi.org/project/futures/
+package:
+  name: py3-futures
+  version: 3.4.0
+  epoch: 0
+  description: Backport of the concurrent.futures package from Python 3
+  copyright:
+    - license: PSF
+  dependencies:
+    runtime:
+      - python-3
+environment:
+  contents:
+    packages:
+      - ca-certificates-bundle
+      - wolfi-base
+      - busybox
+      - build-base
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 738e37148b2f7ecd86cbb8c271f9e033ae66eff8
+      repository: https://github.com/agronholm/pythonfutures
+      tag: ${{package.version}}
+  - name: Python Build
+    uses: python/build-wheel
+  - uses: strip
+update:
+  enabled: true
+  manual: false
+  github:
+    identifier: agronholm/pythonfutures
