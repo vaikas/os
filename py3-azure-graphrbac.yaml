@@ -26,11 +26,6 @@ pipeline:
       expected-commit: fc2efcc6413da2dd0543940e5c398626f49b5b67
       repository: https://github.com/Azure/azure-sdk-for-python
       tag: azure-graphrbac_${{package.version}}
-  - uses: git-checkout
-    with:
-      expected-commit: 6a1bee9d36e4fba47459e1851cfc9f99d4230611
-      repository: https://github.com/Azure/azure-sdk-for-python
-      tag: ${{package.version}}
   - name: Python Build
     uses: python/build-wheel
   - uses: strip
