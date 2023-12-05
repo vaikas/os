@@ -1,0 +1,20 @@
+package:
+  name: jp
+  version: 0.2.1
+  epoch: 0
+  description: "A command line interface to JMESPath, an expression language for manipulating JSON"
+  copyright:
+    - license: Apache-2.0
+
+pipeline:
+  - uses: go/install
+    with:
+      package: github.com/jmespath/jp/...
+      version: ${{package.version}}
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: jmespath/jp
