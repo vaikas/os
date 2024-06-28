@@ -34,7 +34,7 @@ environment:
       - py3-dateutil
       - py3-meson-python
       - py3-tz
-      - py3-cython
+      - py3-supported-cython
       - py3-tzdata
       - py3-supported-gpep517
       - py3-supported-pip
@@ -60,9 +60,6 @@ subpackages:
       provider-priority: ${{range.value}}
       provides:
         - py3-${{vars.pypi-package}}
-    dependencies:
-      runtime:
-        - py${{range.key}}-cython
     pipeline:
       - runs: python${{range.key}} setup.py
       - uses: py/pip-build-install
