@@ -6,12 +6,23 @@ package:
   copyright:
     - license: 'BSD-3-Clause'
   dependencies:
+    provider-priority: 0
     runtime:
       - numpy
       - py3-dateutil
       - py3-tz
       - py3-tzdata
       - python-3
+
+vars:
+  pypi-package: pandas
+
+data:
+  - name: py-versions
+    items:
+      3.10: "310"
+      3.11: "311"
+      3.12: "312"
 
 environment:
   contents:
@@ -21,17 +32,17 @@ environment:
       - ca-certificates-bundle
       - cython
       - meson
-      - numpy
       - py3-dateutil
       - py3-gpep517
       - py3-meson-python
       - py3-setuptools
       - py3-tz
       - py3-tzdata
+      - py3-numpy
       - py3-versioneer
-      - py3-wheel
-      - python-3
-      - python-3-dev
+      - py3-supported-pip
+      - py3-supported-python-dev
+      - py3-supported-wheel
       - wolfi-base
 
 pipeline:
@@ -41,13 +52,24 @@ pipeline:
       tag: v${{package.version}}
       expected-commit: d9cdd2ee5a58015ef6f4d15c7226110c9aab8140
 
-  - runs: |
-      # You have to do this dance with the FDs because without it things fail.
-      # I don't know why, but other places do this, so I'm just copying them.
-      python3 -m gpep517 build-wheel --wheel-dir dist --output-fd 3 3>&1 >&2
-      python3 -m installer -d "${{targets.destdir}}" dist/*.whl
+subpackages:
+  - range: py-versions
+    name: py${{range.key}}-${{vars.pypi-package}}
+    description: ${{vars.pypi-package}} installed for python${{range.key}}
+    dependencies:
+      provider-priority: ${{range.value}}
+      provides:
+        - py3-${{vars.pypi-package}}
+    pipeline:
+      - runs: python${{range.key}} setup.py clean --all
+      - uses: py/pip-build-install
+        with:
+          python: python${{range.key}}
+      - uses: strip
 
-  - uses: strip
+  - name: py3-wheels-${{vars.pypi-package}}
+    pipeline:
+      - uses: py/collect-wheels
 
 test:
   pipeline:
