@@ -30,19 +30,19 @@ environment:
       - build-base
       - busybox
       - ca-certificates-bundle
-      - cython
       - meson
       - py3-dateutil
-      - py3-gpep517
       - py3-meson-python
-      - py3-setuptools
       - py3-tz
+      - py3-cython
       - py3-tzdata
-      - py3-numpy
-      - py3-versioneer
+      - py3-supported-gpep517
       - py3-supported-pip
       - py3-supported-python-dev
+      - py3-supported-numpy
       - py3-supported-wheel
+      - py3-supported-setuptools
+      - py3-supported-versioneer
       - wolfi-base
 
 pipeline:
@@ -60,8 +60,11 @@ subpackages:
       provider-priority: ${{range.value}}
       provides:
         - py3-${{vars.pypi-package}}
+    dependencies:
+      runtime:
+        - py${{range.key}}-cython
     pipeline:
-      - runs: python${{range.key}} setup.py clean --all
+      - runs: python${{range.key}} setup.py
       - uses: py/pip-build-install
         with:
           python: python${{range.key}}
